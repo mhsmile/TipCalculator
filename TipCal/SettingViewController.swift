@@ -8,22 +8,54 @@
 
 import UIKit
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController
+{
 
+    
     @IBOutlet weak var defaultControl: UISegmentedControl!
+       
     
-    
-    override func viewDidLoad() {
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
 
-      
         // Do any additional setup after loading the view.
+        
     }
 
-    override func didReceiveMemoryWarning() {
+    override func viewWillAppear(_ animated: Bool)
+    {
+        super.viewWillAppear(animated)
+        
+        let defaults = UserDefaults.standard
+        let defaultTip = defaults.integer(forKey: "default Tip")
+        defaultControl.selectedSegmentIndex = defaultTip
+        
+    }
+    
+    
+    override func didReceiveMemoryWarning()
+    {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+
+    
+    @IBAction func actDefaultControl(_ sender:UISegmentedControl)
+    {
+        
+        let defaults = UserDefaults.standard
+        let defaultTip = defaultControl.selectedSegmentIndex
+
+        
+        defaults.set(defaultTip, forKey: "default Tip")
+        defaults.synchronize()
+        
+      
+    }
+
     
 
     /*
